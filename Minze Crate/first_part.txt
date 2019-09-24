@@ -1,0 +1,35 @@
+#include "Nintendo.h"
+CGamecubeConsole GamecubeConsole(8);
+Gamecube_Data_t d = defaultGamecubeData;
+CGamecubeController GamecubeController1(7);
+bool isRight = false;
+bool wasRight = false;
+bool isLeft = false;
+bool wasLeft = false;
+bool isUp = false;
+bool wasUp = false;
+bool isDown = false;
+bool wasDown = false;
+
+
+int red_light_pin = A0;
+int green_light_pin = A1;
+int blue_light_pin = A2;
+
+int minValue = 1;
+int maxValue = 254;
+
+class game
+{
+public:
+    int tilt;
+    int x1;
+    int x2;
+    int y1;
+    int y2;
+    bool analogShield = false;
+    int r = 0;
+    int g = 0;
+    int b = 0;
+};
+game *currentGame;

@@ -1,0 +1,4 @@
+#include "Nintendo.h"
+CGamecubeConsole GamecubeConsole(8);      
+Gamecube_Data_t d = defaultGamecubeData;   
+CGamecubeController GamecubeController1(7);
