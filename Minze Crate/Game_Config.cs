@@ -32,17 +32,17 @@ namespace Minze_Crate
         public List<CrateButton> activators;
         public override string ToString()
         {
-            string str = "public class " + this.game_name + " : public game{public:";
-            str += "int tilt =" + tilt + ";";
-            str += "int x1 =" + x1 + ";";
-            str += "int x2 =" + x2 + ";";
-            str += "int y1 =" + y1 + ";";
-            str += "int y2 =" + y2 + ";";
-            str += "byte r =" + r + ";";
-            str += "byte g =" + g + ";";
-            str += "byte b =" + b + ";";
-            if (analogShields) str += "bool analogShield = true;";
-            str += "};";
+            string str = "class " + this.game_name + " : public game{public: " +this.game_name+"(){";
+            str += "this->tilt =" + tilt + ";";
+            str += "this->x1 =" + x1 + ";";
+            str += "this->x2 =" + x2 + ";";
+            str += "this->y1 =" + y1 + ";";
+            str += "this->y2 =" + y2 + ";";
+            str += "this->r =" + r + ";";
+            str += "this->g =" + g + ";";
+            str += "this->b =" + b + ";";
+            if (analogShields) str += "this->analogShield = true;";
+            str += "}};";
             return str;
         }
     }

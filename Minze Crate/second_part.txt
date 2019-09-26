@@ -40,12 +40,7 @@ void setup()
 
     pinMode(Tilt, INPUT_PULLUP);
     pinMode(SWITCH, INPUT_PULLUP);
-
-    if (digitalRead(SWITCH) == LOW && digitalRead(Y2) == LOW)
-        currentGame = new Ultimate();
-    if (digitalRead(SWITCH) == LOW && digitalRead(X2) == LOW)
-        currentGame = new Melee();
-
+	chooseGame();
     GamecubeController1.read();
 }
 
@@ -78,8 +73,11 @@ void loop()
     int pinSWITCH = 0;
     int analogRightShield = 0;
     int analogLeftShield = 0;
-    int controlX = fTwoIP(digitalRead(LEFT), digitalRead(RIGHT), wasLeft, wasRight);
-    int controlY = fTwoIP(digitalRead(DOWN), digitalRead(UP), wasDown, wasUp);
+	
+	
+    int controlX = fTwoIPNoReactivate(digitalRead(LEFT) == LOW, digitalRead(RIGHT) == LOW, wasLeft, wasRight );
+ int   controlY = fTwoIPNoReactivate(digitalRead(DOWN) == LOW, digitalRead(UP) == LOW, wasDown, wasUp );
+
     int positionX = 0;
     int positionY = 0;
     if (controlX != 128)
@@ -100,7 +98,7 @@ void loop()
     if (digitalRead(Tilt) == LOW)
     {
         controlX = 128 + (positionX * currentGame->tilt);
-        controlY = 128 + (positionX * currentGame->tilt);
+        controlY = 128 + (positionY * currentGame->tilt);
     }
     if (digitalRead(X1) == LOW)
     {
@@ -112,11 +110,11 @@ void loop()
     }
     if (digitalRead(Y1) == LOW)
     {
-        controlY = 128 + (positionX * currentGame->y1);
+        controlY = 128 + (positionY * currentGame->y1);
     }
     if (digitalRead(Y2) == LOW)
     {
-        controlY = 128 + (positionX * currentGame->y2);
+        controlY = 128 + (positionY * currentGame->y2);
     }
 
     //Reads CStick pins, same logic as controlstick values.
@@ -189,24 +187,23 @@ void loop()
 
     GamecubeConsole.write(d);
 }
-int fTwoIP(bool isLOW, bool isHIGH, bool &wasLOW, bool &wasHIGH)
-{
-    uint8_t control = 128;
-    if (isLOW && wasHIGH)
-        control = minValue;
-    if (isHIGH && wasLOW)
-        control = maxValue;
-    if (!isLOW && isHIGH)
-    {
-        control = maxValue;
-        wasHIGH = true;
-        wasLOW = false;
-    }
-    if (isLOW && !isHIGH)
-    {
-        control = minValue;
-        wasLOW = true;
-        wasHIGH = false;
-    }
-    return control;
+int fTwoIPNoReactivate(bool isLOW, bool isHIGH, bool& wasLOW, bool& wasHIGH) {
+
+    int control = 128;
+      if (isLOW && wasHIGH)
+    control = minValue;
+  if (isHIGH && wasLOW)
+    control = maxValue;
+  if (!isLOW && isHIGH) {
+    control = maxValue;
+    wasHIGH = true;
+    wasLOW = false;
+  }
+  if (isLOW && !isHIGH) {
+    control = minValue;
+    wasLOW = true;
+    wasHIGH = false;
+  }
+  return control;
+
 }

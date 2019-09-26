@@ -19,7 +19,6 @@ E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\Minze Crate.csproj.CopyComplete
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\Minze Crate.exe
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\Minze Crate.pdb
-E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\Minze Crate.csprojAssemblyReference.cache
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\Login.g.cs
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\Login.baml
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\bin\Release\Xceed.Wpf.AvalonDock.dll
@@ -29,3 +28,7 @@ E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\bin
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\bin\Release\Xceed.Wpf.Toolkit.dll
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\SelectName.g.cs
 E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\SelectName.baml
+E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\bin\Release\Minze Crate.exe.config
+E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\bin\Release\RestSharp.dll
+E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\bin\Release\RestSharp.xml
+E:\OneDrive - Tecnocampus Mataro-Maresme\Programming\Minze Crate\Minze Crate\obj\Release\Minze Crate.csprojAssemblyReference.cache

@@ -2,15 +2,15 @@
 CGamecubeConsole GamecubeConsole(8);
 Gamecube_Data_t d = defaultGamecubeData;
 CGamecubeController GamecubeController1(7);
-bool isRight = false;
 bool wasRight = false;
-bool isLeft = false;
 bool wasLeft = false;
-bool isUp = false;
 bool wasUp = false;
-bool isDown = false;
 bool wasDown = false;
 
+bool lockLEFT = false;
+bool lockRIGHT = false;
+bool lockUP = false;
+bool lockDOWN = false;
 
 int red_light_pin = A0;
 int green_light_pin = A1;

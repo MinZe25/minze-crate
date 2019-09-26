@@ -66,11 +66,11 @@ namespace Minze_Crate
                     {
                         if (first)
                         {
-                            textGames += "digitalRead(" + button.name + ")";
+                            textGames += "digitalRead(" + button.name + ") == LOW";
                             first = false;
                             continue;
                         }
-                        textGames += " && digitalRead(" + button.name + ")";
+                        textGames += " && digitalRead(" + button.name + ")  == LOW";
 
                     }
                     textGames += ")";
