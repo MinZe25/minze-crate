@@ -1,0 +1,26 @@
+﻿<Window x:Class="Minze_Crate.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Minze_Crate"
+        mc:Ignorable="d"
+        Title="Login" Height="250" Width="350" ResizeMode="NoResize" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <StackPanel HorizontalAlignment="Center" Height="225" Width="300">
+        <StackPanel Margin="0,20,0,0">
+            <Label Content="Username"/>
+            <TextBox x:Name="userNameInput" TabIndex="0"/>
+        </StackPanel>
+        <StackPanel Margin="0,20,0,0">
+            <Label Content="Password"/>
+            <PasswordBox x:Name="passwordInput" TabIndex="1" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Margin="0,20,0,0">
+            <CheckBox Content="Remember me" TabIndex="2"/>
+            <CheckBox Content="Auto login" TabIndex="3"/>
+        </StackPanel>
+        <StackPanel Margin="0,20,0,0">
+            <Button Content="Login" Click="OnLogin"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

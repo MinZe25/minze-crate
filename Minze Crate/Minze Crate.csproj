@@ -95,49 +95,50 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="LatestRepoAnswer.cs" />
-    <Compile Include="SelectName.xaml.cs">
+    <Compile Include="Models\CrateButtonComparer.cs" />
+    <Compile Include="Models\LatestRepoAnswer.cs" />
+    <Compile Include="Windows\SelectName.xaml.cs">
       <DependentUpon>SelectName.xaml</DependentUpon>
     </Compile>
-    <Page Include="AngleModifier.xaml">
+    <Page Include="Windows\AngleModifier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ButtonSelector.xaml">
+    <Page Include="Windows\ButtonSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
+    <Page Include="Windows\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AngleModifier.xaml.cs">
+    <Compile Include="Windows\AngleModifier.xaml.cs">
       <DependentUpon>AngleModifier.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ArduinoService.cs" />
-    <Compile Include="ButtonSelector.xaml.cs">
+    <Compile Include="Services\ArduinoService.cs" />
+    <Compile Include="Windows\ButtonSelector.xaml.cs">
       <DependentUpon>ButtonSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Crate.cs" />
-    <Compile Include="CrateButton.cs" />
-    <Compile Include="Cypher.cs" />
-    <Compile Include="Game_Config.cs" />
-    <Compile Include="Login.xaml.cs">
+    <Compile Include="Models\Crate.cs" />
+    <Compile Include="Models\CrateButton.cs" />
+    <Compile Include="Services\Cypher.cs" />
+    <Compile Include="Models\Game_Config.cs" />
+    <Compile Include="Windows\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SelectName.xaml">
+    <Page Include="Windows\SelectName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
