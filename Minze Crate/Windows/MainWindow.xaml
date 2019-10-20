@@ -40,7 +40,7 @@
             <xctk:ColorPicker x:Name="ledPicker" UsingAlphaChannel="False" Width="323" Margin="5,41,5,21"></xctk:ColorPicker>
             <StackPanel Margin="78,10,0,0" Width="225">
                 <Label HorizontalAlignment="Center" Content="Button Activation"/>
-                <CheckBox HorizontalAlignment="Center" Content="Switch" IsChecked="False" x:Name="SwitchCheckbox"/>
+                <CheckBox HorizontalAlignment="Center" Content="Switch" IsChecked="False" x:Name="SwitchCheckbox" Click="SwitchCheckbox_Checked"/>
                 <Button Content="No" Click="ButtonActivator_Click" x:Name="ButtonActivator"></Button>
             </StackPanel>
         </StackPanel>

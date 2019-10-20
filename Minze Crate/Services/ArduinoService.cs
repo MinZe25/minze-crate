@@ -164,6 +164,42 @@ namespace Minze_Crate
             }
 
         }
+        public string ToIno(List<Game_Config> configs)
+        {
+            string textGames = "void chooseGame(){";
+            string textClasses = "";
+            foreach (Game_Config config in configs)
+            {
+                textClasses += config.ToString();
+                if (config.activator != null)
+                {
+                    textGames += "if(";
 
+                    if (config.switchActive)
+                    {
+                        textGames += "digitalRead(" + CrateButton.SWITCH.name + ") == LOW && ";
+                    }
+                    textGames += "digitalRead(" + config.activator.name + ") == LOW)";
+                }
+                textGames += "currentGame = new " + config.game_name.Replace(" ", "_") + "();";
+            }
+            string text = this.readResource("Minze_Crate.first_part.txt");
+            text += textClasses;
+            text += textGames;
+            text += this.readResource("Minze_Crate.second_part.txt");
+
+            return text;
+        }
+
+        public string readResource(string resourceName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
+        }
     }
 }

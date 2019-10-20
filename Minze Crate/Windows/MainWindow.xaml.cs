@@ -34,7 +34,7 @@ namespace Minze_Crate
         Game_Config current_Game_Config;
         ArduinoPort selectedPort;
         List<ArduinoPort> ports;
-        private double version = 0.2;
+        private readonly double version = 0.3;
         public MainWindow()
         {
             InitializeComponent();
@@ -96,6 +96,7 @@ namespace Minze_Crate
             if (!this.game_Configs.Contains(config)) return false;
             this.current_Game_Config = config;
             this.crate = this.current_Game_Config.crate;
+            this.SwitchCheckbox.IsChecked = this.current_Game_Config.switchActive;
             this.RenderLayout();
             return true;
         }
@@ -152,11 +153,11 @@ namespace Minze_Crate
                         this.game_Configs.Add(new Game_Config
                         {
                             game_name = window.name,
-                            tilt = 69,
-                            x1 = 30,
-                            x2 = 50,
-                            y1 = 38,
-                            y2 = 87,
+                            tiltValue = 69,
+                            x1Value = 30,
+                            x2Value = 50,
+                            y1Value = 38,
+                            y2Value = 87,
                             g = 255
                         });
                         var col = ((ObservableCollection<string>)this.comboBox.ItemsSource);
@@ -290,6 +291,7 @@ namespace Minze_Crate
                         {
                             this.game_Configs = newCrate;
                             this.setCurrentGameConfig(this.game_Configs[0]);
+                            this.setupComboBox();
                         }
                     }
                 }
@@ -372,14 +374,14 @@ namespace Minze_Crate
             if (this.selectedPort == null)
                 MessageBox.Show("Please, select a port");
             else
-                MessageBox.Show(ArduinoService.Instance.sendToArduino(this.current_Game_Config.ToIno(), this.selectedPort));
+                MessageBox.Show(ArduinoService.Instance.sendToArduino(ArduinoService.Instance.ToIno(this.game_Configs), this.selectedPort));
         }
 
         private void OnAbout(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Program made by Aitor Garcia Diez\n" +
                 "This is a program intented to be used with \n" +
-                "the Box for smash that I build\n" +
+                "the MinZe Box that I build\n" +
                 "Contact:\n" +
                 "bbminze@gmail.com");
         }
@@ -388,11 +390,11 @@ namespace Minze_Crate
             Game_Config def = new Game_Config
             {
                 game_name = "PM",
-                tilt = 69,
-                x1 = 30,
-                x2 = 50,
-                y1 = 38,
-                y2 = 87,
+                tiltValue = 69,
+                x1Value = 30,
+                x2Value = 50,
+                y1Value = 38,
+                y2Value = 87,
                 r = 102,
                 g = 77,
                 b = 204,
@@ -402,33 +404,40 @@ namespace Minze_Crate
             Game_Config melee = new Game_Config
             {
                 game_name = "Melee",
-                tilt = 74,
-                x1 = 27,
-                x2 = 55,
-                y1 = 27,
-                y2 = 53,
+                tiltValue = 74,
+                x1Value = 27,
+                x2Value = 55,
+                y1Value = 27,
+                y2Value = 53,
                 r = 214,
                 g = 104,
                 b = 14,
                 activator = CrateButton.X2,
-                crate = Crate.createCrateWithButtons()
+                crate = Crate.createCrateWithButtons(),
+                switchActive = true
 
             };
             Game_Config ultimate = new Game_Config
             {
                 game_name = "Ultimate",
-                tilt = 69,
-                x1 = 30,
-                x2 = 50,
-                y1 = 38,
-                y2 = 87,
+                tiltValue = 69,
+                x1Value = 30,
+                x2Value = 50,
+                y1Value = 38,
+                y2Value = 87,
                 r = 255,
                 activator = CrateButton.Y2,
-                crate = Crate.createCrateWithButtons()
+                crate = Crate.createCrateWithButtons(),
+                switchActive = true
 
             };
             this.game_Configs = new List<Game_Config>() { def, melee, ultimate };
             this.setCurrentGameConfig(def);
+        }
+
+        private void SwitchCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+           this.current_Game_Config.switchActive = this.SwitchCheckbox.IsChecked.Value;
         }
     }
 }

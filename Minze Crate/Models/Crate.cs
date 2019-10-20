@@ -34,44 +34,12 @@ namespace Minze_Crate
             return true;
         }
 
-        public string readResource(string resourceName)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
-        }
+    
 
         public Crate()
         {
             this.used_buttons = new List<CrateButton>();
             this.free_buttons = new List<CrateButton>();
-            //this.used_buttons.Add(CrateButton.A.clone());
-            //this.used_buttons.Add(CrateButton.B.clone());
-            //this.used_buttons.Add(CrateButton.X.clone());
-            //this.used_buttons.Add(CrateButton.Y.clone());
-            //this.used_buttons.Add(CrateButton.Z.clone());
-            //this.used_buttons.Add(CrateButton.START.clone());
-            //this.used_buttons.Add(CrateButton.R.clone());
-            //this.used_buttons.Add(CrateButton.L.clone());
-            //this.used_buttons.Add(CrateButton.RLIGHT.clone());
-            //this.used_buttons.Add(CrateButton.LEFT.clone());
-            //this.used_buttons.Add(CrateButton.RIGHT.clone());
-            //this.used_buttons.Add(CrateButton.UP.clone());
-            //this.used_buttons.Add(CrateButton.DOWN.clone());
-            //this.used_buttons.Add(CrateButton.X1.clone());
-            //this.used_buttons.Add(CrateButton.X2.clone());
-            //this.used_buttons.Add(CrateButton.Y1.clone());
-            //this.used_buttons.Add(CrateButton.Y2.clone());
-            //this.used_buttons.Add(CrateButton.Tilt.clone());
-            //this.used_buttons.Add(CrateButton.CLEFT.clone());
-            //this.used_buttons.Add(CrateButton.CRIGHT.clone());
-            //this.used_buttons.Add(CrateButton.CUP.clone());
-            //this.used_buttons.Add(CrateButton.CDOWN.clone());
-            //this.used_buttons.Add(CrateButton.SWITCH.clone());
         }
         public static Crate createCrateWithButtons()
         {

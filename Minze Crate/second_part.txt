@@ -10,8 +10,6 @@ void RGB()
 }
 void setup()
 {
-    // if switch and dup are high = Melee
-    // if switch and downm are high = Ultimate
     pinMode(A, INPUT_PULLUP);
     pinMode(B, INPUT_PULLUP);
     pinMode(X, INPUT_PULLUP);
@@ -40,7 +38,7 @@ void setup()
 
     pinMode(Tilt, INPUT_PULLUP);
     pinMode(SWITCH, INPUT_PULLUP);
-	chooseGame();
+    chooseGame();
     GamecubeController1.read();
 }
 
@@ -73,10 +71,10 @@ void loop()
     int pinSWITCH = 0;
     int analogRightShield = 0;
     int analogLeftShield = 0;
-	
-	
-    int controlX = fTwoIPNoReactivate(digitalRead(LEFT) == LOW, digitalRead(RIGHT) == LOW, wasLeft, wasRight );
- int   controlY = fTwoIPNoReactivate(digitalRead(DOWN) == LOW, digitalRead(UP) == LOW, wasDown, wasUp );
+
+
+    int controlX = fTwoIPNoReactivate(digitalRead(currentGame->LEFT) == LOW, digitalRead(currentGame->RIGHT) == LOW, wasLeft, wasRight );
+    int controlY = fTwoIPNoReactivate(digitalRead(currentGame->DOWN) == LOW, digitalRead(currentGame->UP) == LOW, wasDown, wasUp );
 
     int positionX = 0;
     int positionY = 0;
@@ -95,64 +93,64 @@ void loop()
             positionY = 1;
     }
 
-    if (digitalRead(Tilt) == LOW)
+    if (digitalRead(currentGame->Tilt) == LOW)
     {
         controlX = 128 + (positionX * currentGame->tilt);
         controlY = 128 + (positionY * currentGame->tilt);
     }
-    if (digitalRead(X1) == LOW)
+    if (digitalRead(currentGame->X1) == LOW)
     {
         controlX = 128 + (positionX * currentGame->x1);
     }
-    if (digitalRead(X2) == LOW)
+    if (digitalRead(currentGame->X2) == LOW)
     {
         controlX = 128 + (positionX * currentGame->x2);
     }
-    if (digitalRead(Y1) == LOW)
+    if (digitalRead(currentGame->Y1) == LOW)
     {
         controlY = 128 + (positionY * currentGame->y1);
     }
-    if (digitalRead(Y2) == LOW)
+    if (digitalRead(currentGame->Y2) == LOW)
     {
         controlY = 128 + (positionY * currentGame->y2);
     }
 
     //Reads CStick pins, same logic as controlstick values.
-    if (digitalRead(CLEFT) == HIGH && digitalRead(CRIGHT) == LOW)
+    if (digitalRead(currentGame->CLEFT) == HIGH && digitalRead(currentGame->CRIGHT) == LOW)
         pinxAxisC = 255;
-    if (digitalRead(CLEFT) == LOW && digitalRead(CRIGHT) == HIGH)
+    if (digitalRead(currentGame->CLEFT) == LOW && digitalRead(currentGame->CRIGHT) == HIGH)
         pinxAxisC = 0;
-    if (digitalRead(CDOWN) == HIGH && digitalRead(CUP) == LOW)
+    if (digitalRead(currentGame->CDOWN) == HIGH && digitalRead(currentGame->CUP) == LOW)
         pinyAxisC = 255;
-    if (digitalRead(CDOWN) == LOW && digitalRead(CUP) == HIGH)
+    if (digitalRead(currentGame->CDOWN) == LOW && digitalRead(currentGame->CUP) == HIGH)
         pinyAxisC = 0;
-    if (digitalRead(A) == LOW)
+    if (digitalRead(currentGame->A) == LOW)
         pinA = 1;
-    if (digitalRead(B) == LOW)
+    if (digitalRead(currentGame->B) == LOW)
         pinB = 1;
-    if (digitalRead(X) == LOW)
+    if (digitalRead(currentGame->X) == LOW)
         pinX = 1;
-    if (digitalRead(Y) == LOW)
+    if (digitalRead(currentGame->Y) == LOW)
         pinY = 1;
-    if (digitalRead(Z) == LOW)
+    if (digitalRead(currentGame->Z) == LOW)
         pinZ = 1;
-    if (digitalRead(START) == LOW)
+    if (digitalRead(currentGame->START) == LOW)
         pinSTART = 1;
-    if (digitalRead(RLIGHT) == LOW)
-        analogRightShield = 80;
-    if (digitalRead(R) == LOW)
+    if (digitalRead(currentGame->RLIGHT) == LOW)
+        analogRightShield = currentGame->lightShieldValue;
+    if (digitalRead(currentGame->R) == LOW)
     {
         pinR = 1;
         if (currentGame->analogShield)
             analogRightShield = 140;
     }
-    if (digitalRead(L) == LOW)
+    if (digitalRead(currentGame->L) == LOW)
     {
         pinL = 1;
         if (currentGame->analogShield)
             analogLeftShield = 140;
     }
-    if (digitalRead(SWITCH) == LOW)
+    if (digitalRead(currentGame->SWITCH) == LOW)
         pinSWITCH = 1;
     d.report.dup = 0;
     d.report.dright = 0;
@@ -160,13 +158,13 @@ void loop()
     d.report.dleft = 0;
     if (pinSWITCH == 1)
     {
-        if (digitalRead(X1) == LOW)
+        if (digitalRead(currentGame->X1) == LOW)
             d.report.dleft = 1;
-        if (digitalRead(X2) == LOW)
+        if (digitalRead(currentGame->X2) == LOW)
             d.report.ddown = 1;
-        if (digitalRead(Y1) == LOW)
+        if (digitalRead(currentGame->Y1) == LOW)
             d.report.dup = 1;
-        if (digitalRead(Y2) == LOW)
+        if (digitalRead(currentGame->Y2) == LOW)
             d.report.dright = 1;
     }
     d.report.a = pinA;
@@ -190,20 +188,19 @@ void loop()
 int fTwoIPNoReactivate(bool isLOW, bool isHIGH, bool& wasLOW, bool& wasHIGH) {
 
     int control = 128;
-      if (isLOW && wasHIGH)
-    control = minValue;
-  if (isHIGH && wasLOW)
-    control = maxValue;
-  if (!isLOW && isHIGH) {
-    control = maxValue;
-    wasHIGH = true;
-    wasLOW = false;
-  }
-  if (isLOW && !isHIGH) {
-    control = minValue;
-    wasLOW = true;
-    wasHIGH = false;
-  }
-  return control;
-
+    if (isLOW && wasHIGH)
+        control = minValue;
+    if (isHIGH && wasLOW)
+        control = maxValue;
+    if (!isLOW && isHIGH) {
+        control = maxValue;
+        wasHIGH = true;
+        wasLOW = false;
+    }
+    if (isLOW && !isHIGH) {
+        control = minValue;
+        wasLOW = true;
+        wasHIGH = false;
+    }
+    return control;
 }

@@ -19,6 +19,29 @@ int blue_light_pin = A2;
 int minValue = 1;
 int maxValue = 254;
 
+const int A = 22;
+const int B = 24;
+const int X = 26;
+const int Y = 28;
+const int Z = 30;
+const int START = 31;
+const int R = 34;
+const int L = 35;
+const int RLIGHT = 36;
+const int LEFT = 38;
+const int RIGHT = 39;
+const int UP = 40;
+const int DOWN = 41;
+const int X1 = 44;
+const int X2 = 45;
+const int Y1 = 46;
+const int Y2 = 47;
+const int Tilt = 11;
+const int CLEFT  = 48;
+const int CRIGHT = 49;
+const int CUP    = 50;
+const int CDOWN  = 51;
+const int SWITCH = 12;
 class game
 {
 public:
@@ -31,5 +54,30 @@ public:
     int r = 0;
     int g = 0;
     int b = 0;
+    int A = 0;
+    int B = 0;
+    int X = 0;
+    int START = 0;
+    int LEFT = 0;
+    int RIGHT = 0;
+    int DOWN = 0;
+    int Y = 0;
+    int L = 0;
+    int UP = 0;
+    int R = 0;
+    int X1 = 0;
+    int X2 = 0;
+    int Y2 = 0;
+    int CLEFT  = 0;
+    int CDOWN  = 0;
+    int CRIGHT = 0;
+    int CUP    = 0;
+    int SWITCH = 0;
+    int RLIGHT = 0;
+    int Tilt = 0;
+    int Y1 = 0;
+    int Z = 0;
+    int lightShieldValue;
+
 };
 game *currentGame;

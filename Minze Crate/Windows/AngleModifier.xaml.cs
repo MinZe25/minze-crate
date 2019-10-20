@@ -60,11 +60,11 @@ namespace Minze_Crate
 
         private void OnSaveClick(object sender, RoutedEventArgs e)
         {
-            this.currentConfig.tilt = Convert.ToInt32(this.TiltSlider.Value);
-            this.currentConfig.x1 = Convert.ToInt32(this.X1Slider.Value);
-            this.currentConfig.x2 = Convert.ToInt32(this.X2Slider.Value);
-            this.currentConfig.y1 = Convert.ToInt32(this.Y1Slider.Value);
-            this.currentConfig.y2 = Convert.ToInt32(this.Y2Slider.Value);
+            this.currentConfig.tiltValue = Convert.ToInt32(this.TiltSlider.Value);
+            this.currentConfig.x1Value = Convert.ToInt32(this.X1Slider.Value);
+            this.currentConfig.x2Value = Convert.ToInt32(this.X2Slider.Value);
+            this.currentConfig.y1Value = Convert.ToInt32(this.Y1Slider.Value);
+            this.currentConfig.y2Value = Convert.ToInt32(this.Y2Slider.Value);
             System.Windows.MessageBox.Show("Configuration saved");
         }
 
