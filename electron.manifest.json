@@ -11,7 +11,8 @@
     "buildVersion": "1.0.1",
     "compression": "maximum",
     "directories": {
-      "output": "../../../bin/Desktop"
+      "output": "../../../bin/Desktop",
+      "buildResources": "../../../build"
     },
     "linux":{
       "target": "deb",
@@ -21,7 +22,16 @@
         "Comment": "Configurator for the boxes",
         "Categories": "Network"
       },
-      "maintainer": "aitor@aitordev.com"
+      "maintainer": "aitor@aitordev.com",
+      "extraResources": [
+        {
+          "from": "../../../build",
+          "to": "./bin/build",
+          "filter": [
+            "/"
+          ]
+        }
+      ]
     },
     "extraResources": [
       {

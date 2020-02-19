@@ -1,15 +1,11 @@
-using System;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using ElectronNET.API;
-using ElectronNET.API.Entities;
+using System.Linq;
 using electronNetTest.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Hosting.Internal;
 
 namespace electronNetTest
 {
@@ -17,10 +13,10 @@ namespace electronNetTest
     {
         public IConfiguration Configuration { get; }
         private ElectronController _electronController;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-    
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -34,7 +30,6 @@ namespace electronNetTest
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ElectronController electronController)
         {
-
             _electronController = electronController;
             if (env.IsDevelopment())
             {
@@ -59,9 +54,13 @@ namespace electronNetTest
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            var serverAddresses = app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
+            if (serverAddresses?.Count > 0)
+            {
+                _electronController.SetPortNumber(serverAddresses.First().ToString());
+            }
+
             _electronController.ConfigureElectron();
         }
-
-     
     }
 }

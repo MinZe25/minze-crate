@@ -9,5 +9,20 @@
     <Content Update="electron.manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Remove="old\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="old\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="old\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="old\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="old\Minze Crate\app.config" />
+    <_ContentIncludedByDefault Remove="old\Minze Crate\bin\Debug\Minze Crate.exe.config" />
+    <_ContentIncludedByDefault Remove="old\Minze Crate\packages.config" />
   </ItemGroup>
 </Project>

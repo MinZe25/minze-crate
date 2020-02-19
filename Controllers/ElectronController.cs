@@ -1,7 +1,11 @@
 using System;
+using System.Net;
+using System.Reflection.Emit;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace electronNetTest.Controllers
@@ -9,6 +13,7 @@ namespace electronNetTest.Controllers
     public class ElectronController
     {
         public BrowserWindow MainWindow;
+        public int PortNumber;
 
         public ElectronController()
         {
@@ -29,8 +34,7 @@ namespace electronNetTest.Controllers
         private void BuildMenu(BrowserWindow window)
         {
             MainWindow = window;
-
-            var submenu = new[]
+            var submenuFile = new[]
             {
                 new MenuItem
                 {
@@ -45,23 +49,93 @@ namespace electronNetTest.Controllers
                     Type = MenuType.normal,
                     Click = SaveConfiguration,
                     Accelerator = "CmdOrCtrl+S"
+                },
+                new MenuItem()
+                {
+                    Type = MenuType.separator
+                },
+                new MenuItem()
+                {
+                    Label = "Exit",
+                    Type = MenuType.normal,
+                    Click = Exit,
+                    Accelerator = "Alt+F4"
                 }
             };
             var file = new MenuItem
             {
                 Label = "File",
                 Type = MenuType.submenu,
-                Submenu = submenu
+                Submenu = submenuFile
             };
-            var menu = new MenuItem[1];
-            menu[0] = file;
-            MainWindow.SetMenu(menu);
-            MainWindow.OnClosed += () =>
+            var submenuAdvanced = new[]
             {
-                MainWindow.Destroy();
-                MainWindow = null;
-                System.Environment.Exit(0);
+                new MenuItem()
+                {
+                    Label = "Change Modifier Angles",
+                    Type = MenuType.normal,
+                    Accelerator = "F2"
+                }
             };
+            var advanced = new MenuItem()
+            {
+                Label = "Advanced",
+                Type = MenuType.submenu,
+                Submenu = submenuAdvanced
+            };
+            var submenuBox = new[]
+            {
+                new MenuItem()
+                {
+                    Label = "Port",
+                    Type = MenuType.submenu,
+                    Submenu = new[]
+                    {
+                        new MenuItem()
+                        {
+                            Label = "Reload"
+                        },
+                        new MenuItem()
+                        {
+                            Type = MenuType.separator
+                        }
+                    }
+                },
+                new MenuItem()
+                {
+                    Label = "Upload configuration"
+                }
+            };
+            var box = new MenuItem()
+            {
+                Label = "Box",
+                Type = MenuType.submenu,
+                Submenu = submenuBox
+            };
+            var submenuHelp = new[]
+            {
+                new MenuItem()
+                {
+                    Label = "About",
+                    Accelerator = "F1",
+                    Click = OpenNewWindow
+                }
+            };
+            var help = new MenuItem()
+            {
+                Label = "Help",
+                Type = MenuType.submenu,
+                Submenu = submenuHelp,
+            };
+            var menu = new[]
+            {
+                file,
+                advanced,
+                box,
+                help
+            };
+            MainWindow.SetMenu(menu);
+            MainWindow.OnClosed += Exit;
         }
 
         private void LoadConfiguration()
@@ -104,7 +178,39 @@ namespace electronNetTest.Controllers
 
         private void OpenNewWindow()
         {
-            
+            var options = new BrowserWindowOptions
+            {
+                Title = "Angles Configurator",
+                TitleBarStyle = TitleBarStyle.customButtonsOnHover,
+                DarkTheme = true,
+                AutoHideMenuBar = true
+            };
+            Task.Run(() =>
+                    Electron.WindowManager.CreateWindowAsync(options, $"http://localhost:{PortNumber}/home/privacy"))
+                .ContinueWith(task =>
+                {
+                    var w = task.Result;
+                    w.SetMenu(new []
+                    {
+                        new MenuItem()
+                        {
+                            Label = ""
+                        }
+                    });
+                    w.SetMenuBarVisibility(false);
+                });
+        }
+
+        private void Exit()
+        {
+            MainWindow?.Destroy();
+            MainWindow = null;
+            System.Environment.Exit(0);
+        }
+
+        public bool SetPortNumber(string url)
+        {
+            return int.TryParse(url.Substring(url.LastIndexOf(':') + 1), out PortNumber);
         }
     }
 }

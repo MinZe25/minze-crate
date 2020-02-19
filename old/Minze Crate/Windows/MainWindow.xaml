@@ -29,7 +29,6 @@
                     <MenuItem Header="Upload Configuration" Click="UploadToArduino"/>
                 </MenuItem>
                 <MenuItem Header="Help" VerticalAlignment="Center">
-                    <!--<MenuItem Header="Help"/>-->
                     <MenuItem Header="About" VerticalAlignment="Center" Click="OnAbout"/>
                 </MenuItem>
             </Menu>
