@@ -1,0 +1,42 @@
+{
+  "executable": "electronNetTest",
+  "splashscreen": {
+    "imageFile": ""
+  },
+  "singleInstance": true,
+  "build": {
+    "appId": "com.minze.configurator.app",
+    "productName": "MinZeBox Configurator",
+    "copyright": "Copyright © 2019",
+    "buildVersion": "1.0.1",
+    "compression": "maximum",
+    "directories": {
+      "output": "../../../bin/Desktop"
+    },
+    "linux":{
+      "target": "deb",
+      "executableName": "mbox_configurator",
+      "desktop": {
+        "Name": "MinzeBox Configurator",
+        "Comment": "Configurator for the boxes",
+        "Categories": "Network"
+      },
+      "maintainer": "aitor@aitordev.com"
+    },
+    "extraResources": [
+      {
+        "from": "./bin",
+        "to": "bin",
+        "filter": ["**/*"]
+      }
+    ],
+    "files": [
+      {
+        "from": "./ElectronHostHook/node_modules",
+        "to": "ElectronHostHook/node_modules",
+        "filter": ["**/*"]
+      },
+      "**/*"
+    ]
+  }
+}
