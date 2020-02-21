@@ -1,0 +1,29 @@
+@using electronNetTest.Views.Home
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<header class="navbar">
+
+    @foreach (var page in _HomeLayout.Pages)
+    {
+        <partial name="Components/NavBarTab"
+                 view-data='new ViewDataDictionary(ViewData)
+{
+    {"page", page}
+}
+    '/>
+    }
+</header>
+<div class="container">
+    @RenderBody()
+</div>
+</body>
+</html>

@@ -24,5 +24,6 @@
     <_ContentIncludedByDefault Remove="old\Minze Crate\app.config" />
     <_ContentIncludedByDefault Remove="old\Minze Crate\bin\Debug\Minze Crate.exe.config" />
     <_ContentIncludedByDefault Remove="old\Minze Crate\packages.config" />
+    <_ContentIncludedByDefault Remove="Views\Pages\Buttons.cshtml" />
   </ItemGroup>
 </Project>

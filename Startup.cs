@@ -25,6 +25,7 @@ namespace electronNetTest
             // services.AddScoped<IElectronController, ElectronController>();
             services.AddSingleton(new ElectronController());
             services.AddControllersWithViews();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
