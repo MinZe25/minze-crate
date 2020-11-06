@@ -23,14 +23,15 @@ namespace electronNetTest
         public void ConfigureServices(IServiceCollection services)
         {
             // services.AddScoped<IElectronController, ElectronController>();
+            services.AddSession();
             services.AddSingleton(new ElectronController());
             services.AddControllersWithViews();
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ElectronController electronController)
         {
+            app.UseSession();
             _electronController = electronController;
             if (env.IsDevelopment())
             {

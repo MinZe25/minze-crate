@@ -26,4 +26,8 @@
     <_ContentIncludedByDefault Remove="old\Minze Crate\packages.config" />
     <_ContentIncludedByDefault Remove="Views\Pages\Buttons.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content" />
+    <Folder Include="Content\Styles" />
+  </ItemGroup>
 </Project>

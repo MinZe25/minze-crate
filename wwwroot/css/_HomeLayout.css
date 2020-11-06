@@ -1,0 +1,25 @@
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    /*border: 1px solid grey*/
+    background-color: #e7e7e7;
+
+}
+
+.page {
+    padding: 5px;
+    margin: 1px;
+    /*border: 1px solid black;*/
+    border-radius: 3px;
+    background-color: #e7e7e7;
+}
+
+.active {
+    background-color: #969696;
+    border-bottom: 5px solid red;
+}
+
+.page > a {
+    text-decoration: none;
+    color: black;
+}

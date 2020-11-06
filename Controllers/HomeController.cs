@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using electronNetTest.Models;
-using ElectronNET.API.Entities;
-using ElectronNET.API;
+using Microsoft.AspNetCore.Http;
 
 namespace electronNetTest.Controllers
 {
@@ -23,6 +17,7 @@ namespace electronNetTest.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("active", "Index");
             return View();
         }
 
